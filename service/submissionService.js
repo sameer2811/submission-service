@@ -7,11 +7,11 @@ class SubmissionService {
 
     async createSubmissionProblem(submissionPayload) {
         // TODO : Add the error Handling here;
-        const submission = await this.submissionRepository.createSubmissionProblem(submissionPayload);
-        const response = await addSubmissionQueue(submissionPayload)
+        const submissionResponse = await this.submissionRepository.createSubmissionProblem(submissionPayload);
+        const queueReponse = await addSubmissionQueue(submissionPayload)
         return {
-            queueReponse: response,
-            submissionResponse: response
+            queueReponse: queueReponse,
+            submissionResponse: submissionResponse
         };
     }
 }
