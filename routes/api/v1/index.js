@@ -1,4 +1,5 @@
 const StatusCodes = require('http-status-codes');
+const { createSubmissionControlller } = require('../../../controller/submissionController');
 
 
 async function v1Router(fastify, options) {
@@ -18,6 +19,11 @@ async function v1Router(fastify, options) {
             "ping": "pong"
         })
     });
+
+    fastify.get("/submission" , createSubmissionControlller);
+
+
+    fastify.post("/submission" , createSubmissionControlller);
 }
 
 module.exports = v1Router;

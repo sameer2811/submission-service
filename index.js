@@ -3,6 +3,7 @@ const Fastify = require('fastify');
 const app = require('./app');
 // config import
 const serverConfig = require('./config/serverConfig');
+const connectToDataBase = require('./config/dbConfig');
 
 const fastifyServer = Fastify({
     logger: true
@@ -20,8 +21,10 @@ async function startServer() {
         }
         // Connect to the DataBase
         console.log("Server has started Listening at the PORT ", serverConfig.PORT);
+        connectToDataBase();
+        console.log("Server has been connected to DB");
+
     });
 }
-
 
 startServer();
