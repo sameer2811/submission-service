@@ -21,7 +21,7 @@ async function startServer() {
         }
         // Connect to the DataBase
         console.log("Server has started Listening at the PORT ", serverConfig.PORT);
-        connectToDataBase();
+        await connectToDataBase();
         console.log("Server has been connected to DB");
 
     });

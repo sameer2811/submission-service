@@ -6,15 +6,19 @@ async function createSubmissionControlller(req, res) {
         SubmissionService
     } = this;
 
-    const submissionResponse = SubmissionService.createSubmissionProblem(req.body);
-    return res.status(StatusCodes.OK).json({
-        error: {},
-        success: true,
-        data: submissionResponse,
-        msg: "Created Submission Successfully!!"
-    })
+    try {
+        const submissionResponse = SubmissionService.createSubmissionProblem(req.body);
+        return res.status(StatusCodes.OK).send({
+            error: {},
+            success: true,
+            data: submissionResponse,
+            msg: "Created Submission Successfully!!"
+        });
+    } catch (err) {
+        // Calling of next function needs to be done here.
+        // next(err);
+    }
 }
-
 
 module.exports = {
     createSubmissionControlller

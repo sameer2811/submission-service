@@ -1,3 +1,4 @@
+const InternalServerError = require("../error/InternalServerError");
 const SubmissionModel = require("../models/submissionModel");
 
 class SubmissionRepository {
@@ -6,8 +7,15 @@ class SubmissionRepository {
     }
 
     async createSubmissionProblem(submissionPayload) {
-        const response = this.submissionModel.create(submissionPayload);
-        return response;
+        try {
+            const response = this.submissionModel.create(submissionPayload);
+            if (!response) {
+                throw new InternalServerError("Some issue in create submission problem repository", response);
+            }
+            return response;
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
