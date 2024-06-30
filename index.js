@@ -4,11 +4,14 @@ const app = require('./app');
 // config import
 const serverConfig = require('./config/serverConfig');
 const connectToDataBase = require('./config/dbConfig');
+const errorHandler = require('./errorHandler');
 
 const fastifyServer = Fastify({
     logger: true
 })
 fastifyServer.register(app);
+fastifyServer.setErrorHandler(errorHandler);
+
 fastifyServer.after(function () {
     console.log("printing all the registered routes ", fastifyServer.printRoutes());
 })
