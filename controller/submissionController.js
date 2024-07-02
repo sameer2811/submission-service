@@ -1,3 +1,6 @@
+const {
+    error
+} = require("console");
 const StatusCodes = require("http-status-codes");
 
 // TODO : Add Validation Layer
@@ -7,7 +10,8 @@ async function createSubmissionControlller(req, res) {
     } = this;
 
     try {
-        const submissionResponse = SubmissionService.createSubmissionProblem(req.body);
+        const submissionResponse = await SubmissionService.createSubmissionProblem(req.body);
+        console.log("Submission response  is " , submissionResponse);
         return res.status(StatusCodes.OK).send({
             error: {},
             success: true,
@@ -15,7 +19,7 @@ async function createSubmissionControlller(req, res) {
             msg: "Created Submission Successfully!!"
         });
     } catch (err) {
-        // Calling of next function needs to be done here.
+        console.log("Inside the catch", err);
         // next(err);
     }
 }
