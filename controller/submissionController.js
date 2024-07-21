@@ -20,10 +20,10 @@ async function createSubmissionControlller(req, res) {
         });
     } catch (err) {
         console.log("Inside the catch", err);
-        // next(err);
+        throw err;
     }
 }
 
 module.exports = {
     createSubmissionControlller
-}
+};

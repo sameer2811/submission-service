@@ -40,7 +40,9 @@ class SubmissionService {
                     code: submissionPayload.code,
                     language: submissionPayload.language,
                     testCase: problemResponse.data.testCases[0].input,
-                    outputCase: problemResponse.data.testCases[0].output
+                    outputCase: problemResponse.data.testCases[0].output,
+                    userId: submissionPayload.userId,
+                    submissionId: submissionResponse._id
                 }
             }
             console.log("Printing the submissionPayloadData ", submissionPayloadData);

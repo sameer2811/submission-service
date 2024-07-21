@@ -5,6 +5,10 @@ const app = require('./app');
 const serverConfig = require('./config/serverConfig');
 const connectToDataBase = require('./config/dbConfig');
 const errorHandler = require('./errorHandler');
+const {
+    EVALUATION_QUEUE
+} = require('./constants');
+const initalizeSubmissionWorker = require('./workers/evaluationWorker');
 
 const fastifyServer = Fastify({
     logger: true
@@ -14,7 +18,7 @@ fastifyServer.setErrorHandler(errorHandler);
 
 fastifyServer.after(function () {
     console.log("printing all the registered routes ", fastifyServer.printRoutes());
-})
+});
 
 async function startServer() {
     fastifyServer.listen(serverConfig.PORT, async function (err) {
@@ -25,8 +29,8 @@ async function startServer() {
         // Connect to the DataBase
         console.log("Server has started Listening at the PORT ", serverConfig.PORT);
         await connectToDataBase();
+        initalizeSubmissionWorker(EVALUATION_QUEUE);
         console.log("Server has been connected to DB");
-
     });
 }
 
